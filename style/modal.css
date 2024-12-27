@@ -200,6 +200,17 @@ input {
   border: 0.8px solid #ccc;
   outline: none;
 }
+
+.error span{
+  opacity: 1;
+  font-size: 0.6em;
+  color: red;
+}
+
+.error input{
+  border-color: red;
+}
+
 .text-control {
   margin: 0;
   padding: 8px;

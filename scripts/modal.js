@@ -17,6 +17,7 @@ function closeModal() {
   modalbg.style.display = "none"; 
 }
 
+// close modal event
 closeBtn.addEventListener("click", closeModal);
 
 modalbg.addEventListener("click", (event) => {
@@ -24,3 +25,5 @@ modalbg.addEventListener("click", (event) => {
       closeModal()
   }
 })
+
+
