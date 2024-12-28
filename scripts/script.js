@@ -7,10 +7,12 @@ const quantity = document.getElementById('quantity');
 const birthdate = document.getElementById('birthdate');
 const locations = document.querySelectorAll('#allLocations .checkbox-input');
 const checkbox1 = document.getElementById('checkbox1');
-
 const regexQuantity = /^([0-9]{1,2})$/;
-const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+/**
+* Fonction qui valide ou non le format
+* @param {string} first : Prénom
+*/
 
 function validFirstName(first) {
   let formFirstName = document.querySelector(".formFirstName")
@@ -52,8 +54,25 @@ function validEmail(email) {
     formEmail.classList.remove("error")
     errorEmail.textContent = ""
   }
-
 }
+
+function birthDate(inputDate) {
+  let formBirth = document.querySelector(".birthDate")
+  let errorBirth = document.querySelector(".birthDate span")
+  const currentDate = new Date();
+  const userDate = new Date(inputDate);
+
+  if (isNaN(userDate) || userDate > currentDate) {
+    formBirth.classList.add("error")
+    errorBirth.textContent =  "La date n'est pas bonne"
+    return false
+  }
+  formBirth.classList.remove("error")
+  errorBirth.textContent = ''
+    return true;
+}
+
+
 
 function validate() {
   let form = document.querySelector("form")
@@ -63,6 +82,7 @@ function validate() {
     validFirstName(firstName.value)
     validLastName(lastName.value)
     validEmail(email.value)
+    birthDate(birthdate.value)
   })
 }
 

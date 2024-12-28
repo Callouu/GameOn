@@ -195,6 +195,7 @@ label {
   display: inline-block;
   margin-bottom: 11px;
 }
+
 input {
   padding: 8px;
   border: 0.8px solid #ccc;
@@ -203,12 +204,16 @@ input {
 
 .error span{
   opacity: 1;
-  font-size: 0.6em;
-  color: red;
+  font-size: 0.5em;
+  color: #FF4E60;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  line-height: 0.3;
 }
 
 .error input{
-  border-color: red;
+  border: 2px solid #FF4E60;
 }
 
 .text-control {
