@@ -1,21 +1,21 @@
 // DOM Elements
 const form = document.querySelector("form")
 const firstName = document.getElementById("first")
-const lastName = document.getElementById('last');
-const email = document.getElementById('email');
-const quantity = document.getElementById('quantity');
-const birthdate = document.getElementById('birthdate');
-const locations = document.querySelectorAll('#allLocations .checkbox-input');
+const lastName = document.getElementById('last')
+const email = document.getElementById('email')
+const quantity = document.getElementById('quantity')
+const birthdate = document.getElementById('birthdate')
+const locations = document.querySelectorAll('#allLocations .checkbox-input')
 //const radioBtnLocation = document.querySelectorAll('.formLocation input[type="radio"]')
-const radios = document.querySelectorAll('input[name = "location"]');  
-const loc1 = document.getElementById("location1");
-const loc2 = document.getElementById("location2");
-const loc3 = document.getElementById("location3");
-const loc4 = document.getElementById("location4");
-const loc5 = document.getElementById("location5");
-const loc6 = document.getElementById("location6");
-const checkbox1 = document.getElementById('checkbox1');
-const regexQuantity = /^([0-9]{1,2})$/;
+const radios = document.querySelectorAll('input[name = "location"]')  
+const loc1 = document.getElementById("location1")
+const loc2 = document.getElementById("location2")
+const loc3 = document.getElementById("location3")
+const loc4 = document.getElementById("location4")
+const loc5 = document.getElementById("location5")
+const loc6 = document.getElementById("location6")
+const checkbox1 = document.getElementById('checkbox1')
+const checkbox2 = document.getElementById("checkbox2")
 
 /**
 * Fonction qui valide ou non le format du prénom
@@ -100,8 +100,8 @@ function birthDate(inputDate) {
 function participation(number) {
   const tournament = document.querySelector(".formTournament")
   const errorTournament = document.querySelector(".formTournament span")
-  let numberRegex = new RegExp("[0-9]{1,}")
-  if (!numberRegex.test(number)) {
+  let quantityRegex = new RegExp("[0-9]{1,}")
+  if (!quantityRegex.test(number)) {
     tournament.classList.add("error")
     errorTournament.textContent =  "Veuillez remplir le champ"
   } else {
@@ -121,7 +121,7 @@ function participation(number) {
 /**
 * Fonction qui valide si un élément est coché
 */
-function isChecked() {
+function cityCheck() {
   const formLocation = document.querySelector(".formLocation")
   const errorLocation = document.getElementById("errorLocation")
 
@@ -134,6 +134,36 @@ function isChecked() {
   }
 }
 
+/**
+* Fonction qui valide ou non si la case est bien coché
+* @param {boolean} cgu : Cocher la case obligatoire
+*/
+function cguCheck(cgu) {
+  const formCheck = document.querySelector(".formCheck")
+  const errorCheck = document.getElementById("cgu")
+  if (!cgu.checked) {
+    formCheck.classList.add("error")
+    errorCheck.textContent =  "Veuillez accepter les conditions d'utilisation"
+  } else {
+    formCheck.classList.remove("error")
+    errorCheck.textContent =  ""
+  }
+}
+
+/**
+ * Fonction pour récupérer la valeur true ou false de la #checkbox 2
+ * @param {boolean} checkbox2 : la case est coché ou non
+ * @returns {boolean} : true or false
+ */
+function newsletter() {
+  if (checkbox2.checked){
+    console.log("coché")
+    return true
+  } else {
+    console.log("pas coché")
+    return false
+  }
+}
 
 function validate() {
 
@@ -144,7 +174,9 @@ function validate() {
     validEmail(email.value)
     birthDate(birthdate.value)
     participation(quantity.value)
-    isChecked()
+    cityCheck()
+    cguCheck(checkbox1)
+    newsletter()
   })
 }
 
