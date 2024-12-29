@@ -10,13 +10,12 @@ const checkbox1 = document.getElementById('checkbox1');
 const regexQuantity = /^([0-9]{1,2})$/;
 
 /**
-* Fonction qui valide ou non le format
-* @param {string} first : Prénom
+* Fonction qui valide ou non le format du prénom
+* @param {string} first : Prénom de la personne
 */
-
 function validFirstName(first) {
-  let formFirstName = document.querySelector(".formFirstName")
-  let errorFirstName = document.querySelector(".formFirstName span")
+  const formFirstName = document.querySelector(".formFirstName")
+  const errorFirstName = document.querySelector(".formFirstName span")
   let nameRegex = new RegExp("^[a-zA-Z-]{2,}$")
 
   if (!nameRegex.test(first)) {
@@ -28,9 +27,13 @@ function validFirstName(first) {
   }
 }
 
+/**
+* Fonction qui valide ou non le format du nom
+* @param {string} last : Nom de la personne
+*/
 function validLastName(last) {
-  let formLastName = document.querySelector(".formLastName")
-  let errorLastName = document.querySelector(".formLastName span")
+  const formLastName = document.querySelector(".formLastName")
+  const errorLastName = document.querySelector(".formLastName span")
   let nameRegex = new RegExp ("^[a-zA-Z-]{2,}$")
 
   if (!nameRegex.test(last)) {
@@ -42,9 +45,13 @@ function validLastName(last) {
   }
 }
 
+/**
+* Fonction qui valide ou non le format de l'email
+* @param {string} email : Adresse mail de la personne
+*/
 function validEmail(email) {
-  let formEmail = document.querySelector(".formEmail")
-  let errorEmail = document.querySelector(".formEmail span")
+  const formEmail = document.querySelector(".formEmail")
+  const errorEmail = document.querySelector(".formEmail span")
   let emailRegex = new RegExp ("/^[^\s@]+@[^\s@]+\.[^\s@]+$/")
 
   if (!emailRegex.test(email)) {
@@ -56,26 +63,47 @@ function validEmail(email) {
   }
 }
 
+/**
+* Fonction qui valide ou non le format de l'email
+* @param {string} inputDate : Date de naissance de la personne
+*/
 function birthDate(inputDate) {
-  let formBirth = document.querySelector(".birthDate")
-  let errorBirth = document.querySelector(".birthDate span")
-  const currentDate = new Date();
-  const userDate = new Date(inputDate);
+  const formBirth = document.querySelector(".birthDate")
+  const errorBirth = document.querySelector(".birthDate span")
+  const userDate = new Date(inputDate)
+  const currentDate = new Date()
+  //const minAgeDate = new Date()
+  //minAgeDate.setFullYear(minAgeDate.getFullYear() - 16)
 
   if (isNaN(userDate) || userDate > currentDate) {
     formBirth.classList.add("error")
     errorBirth.textContent =  "La date n'est pas bonne"
-    return false
   }
-  formBirth.classList.remove("error")
-  errorBirth.textContent = ''
-    return true;
+  else {
+    formBirth.classList.remove("error")
+    errorBirth.textContent = ''
+  }
+}
+
+/**
+* Fonction qui valide ou non le format de l'email
+* @param {string} number : Nombre de participation 
+*/
+function participation(number) {
+  const tournament = document.querySelector(".formTournament")
+  const errorTournament = document.querySelector(".formTournament span")
+  let numberRegex = new RegExp("[0-9]{1,}")
+  if (!numberRegex.test(number)) {
+    tournament.classList.add("error")
+    errorTournament.textContent =  "Veuillez remplir le champ"
+  } else {
+    tournament.classList.remove("error")
+    errorTournament.textContent = ''
+  }
 }
 
 
-
 function validate() {
-  let form = document.querySelector("form")
 
   form.addEventListener("submit", (event) => {
     event.preventDefault()
@@ -83,6 +111,7 @@ function validate() {
     validLastName(lastName.value)
     validEmail(email.value)
     birthDate(birthdate.value)
+    participation(quantity.value)
   })
 }
 
