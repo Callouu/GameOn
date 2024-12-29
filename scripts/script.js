@@ -16,10 +16,12 @@ const loc5 = document.getElementById("location5")
 const loc6 = document.getElementById("location6")
 const checkbox1 = document.getElementById('checkbox1')
 const checkbox2 = document.getElementById("checkbox2")
+const formData = document.querySelectorAll(".formData")
 
 /**
 * Fonction qui valide ou non le format du prénom
 * @param {string} first : Prénom de la personne
+* @throws {Error}
 */
 function validFirstName(first) {
   const formFirstName = document.querySelector(".formFirstName")
@@ -29,6 +31,7 @@ function validFirstName(first) {
   if (!nameRegex.test(first)) {
     formFirstName.classList.add("error")
     errorFirstName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+    throw new Error()
   } else {
     formFirstName.classList.remove("error")
     errorFirstName.textContent = ""
@@ -38,6 +41,7 @@ function validFirstName(first) {
 /**
 * Fonction qui valide ou non le format du nom
 * @param {string} last : Nom de la personne
+* @throws {Error}
 */
 function validLastName(last) {
   const formLastName = document.querySelector(".formLastName")
@@ -47,6 +51,7 @@ function validLastName(last) {
   if (!nameRegex.test(last)) {
     formLastName.classList.add("error")
     errorLastName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+    throw new Error()
   } else {
     formLastName.classList.remove("error")
     errorLastName.textContent = ""
@@ -56,6 +61,7 @@ function validLastName(last) {
 /**
 * Fonction qui valide ou non le format de l'email
 * @param {string} email : Adresse mail de la personne
+* @throws {Error}
 */
 function validEmail(email) {
   const formEmail = document.querySelector(".formEmail")
@@ -65,17 +71,17 @@ function validEmail(email) {
   if (!emailRegex.test(email)) {
     formEmail.classList.add("error")
     errorEmail.textContent =  "L'email n'est pas valide"
-    console.log("erreur")
+    throw new Error()
   } else {
     formEmail.classList.remove("error")
     errorEmail.textContent = ""
-    console.log("Réussi")
   }
 }
 
 /**
 * Fonction qui valide ou non le format de l'email
 * @param {string} inputDate : Date de naissance de la personne
+* @throws {Error}
 */
 function birthDate(inputDate) {
   const formBirth = document.querySelector(".birthDate")
@@ -85,13 +91,17 @@ function birthDate(inputDate) {
   const minAgeDate = new Date()
   minAgeDate.setFullYear(minAgeDate.getFullYear() - 16)
 
+  // Définit si le champ est vide ou si la date est dans le futur
   if (isNaN(userDate) || userDate > currentDate) {
     formBirth.classList.add("error")
     errorBirth.textContent =  "La date n'est pas bonne"
+    throw new Error()
   }
+  // Définit une erreur à l'âge minimum de 16 ans
   else if (userDate > minAgeDate) {
     formBirth.classList.add("error")
     errorBirth.textContent =  "Vous devez avoir au moins 16 ans"
+    throw new Error()
   }
   else {
     formBirth.classList.remove("error")
@@ -102,6 +112,7 @@ function birthDate(inputDate) {
 /**
 * Fonction qui valide ou non le format de l'email
 * @param {string} number : Nombre de participation 
+* @throws {Error}
 */
 function participation(number) {
   const tournament = document.querySelector(".formTournament")
@@ -110,22 +121,16 @@ function participation(number) {
   if (!quantityRegex.test(number)) {
     tournament.classList.add("error")
     errorTournament.textContent =  "Veuillez remplir le champ"
+    throw new Error()
   } else {
     tournament.classList.remove("error")
     errorTournament.textContent = ''
   }
 }
 
-/**function initAddEventListenerButton() { 
-  radios.forEach(button => {
-    button.addEventListener('change', () => {                            
-    });
-  })
-} 
-*/
-
 /**
 * Fonction qui valide si un élément est coché
+* @throws {Error}
 */
 function cityCheck() {
   const formLocation = document.querySelector(".formLocation")
@@ -134,6 +139,7 @@ function cityCheck() {
   if(!loc1.checked && !loc2.checked && !loc3.checked && !loc4.checked && !loc5.checked && !loc6.checked) {
     formLocation.classList.add("error")
     errorLocation.textContent =  "Veuillez selectionner une ville"
+    throw new Error()
   } else {
     formLocation.classList.remove("error")
     errorLocation.textContent =  ""
@@ -143,6 +149,7 @@ function cityCheck() {
 /**
 * Fonction qui valide ou non si la case est bien coché
 * @param {boolean} cgu : Cocher la case obligatoire
+* @throws {Error}
 */
 function cguCheck(cgu) {
   const formCheck = document.querySelector(".formCheck")
@@ -150,6 +157,7 @@ function cguCheck(cgu) {
   if (!cgu.checked) {
     formCheck.classList.add("error")
     errorCheck.textContent =  "Veuillez accepter les conditions d'utilisation"
+    throw new Error()
   } else {
     formCheck.classList.remove("error")
     errorCheck.textContent =  ""
@@ -171,10 +179,8 @@ function newsletter() {
   }
 }
 
-function validate() {
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault()
+function manageForm() {
+  try {
     validFirstName(firstName.value)
     validLastName(lastName.value)
     validEmail(email.value)
@@ -183,6 +189,29 @@ function validate() {
     cityCheck()
     cguCheck(checkbox1)
     newsletter()
+    return true
+  }
+  catch (erreur){
+    return false
+  }
+}
+
+function confirmForm() {
+  const formContent = document.querySelector(".modal-body")
+  const validContent = document.querySelector(".formValid")
+  const validText = document.querySelector(".formValid span")
+  formContent.style.display = 'none'
+  validContent.style.display = 'block'
+  validText.textContent = "Merci pour votre inscription"
+}
+
+function validate() {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault()
+    const validForm = manageForm()
+    if(validForm) {
+      confirmForm()
+    }
   })
 }
 
