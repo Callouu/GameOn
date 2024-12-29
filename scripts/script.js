@@ -60,14 +60,16 @@ function validLastName(last) {
 function validEmail(email) {
   const formEmail = document.querySelector(".formEmail")
   const errorEmail = document.querySelector(".formEmail span")
-  let emailRegex = new RegExp ("/^[^\s@]+@[^\s@]+\.[^\s@]+$/")
+  let emailRegex = new RegExp ("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+")
 
   if (!emailRegex.test(email)) {
     formEmail.classList.add("error")
     errorEmail.textContent =  "L'email n'est pas valide"
+    console.log("erreur")
   } else {
     formEmail.classList.remove("error")
     errorEmail.textContent = ""
+    console.log("Réussi")
   }
 }
 
@@ -80,12 +82,16 @@ function birthDate(inputDate) {
   const errorBirth = document.querySelector(".birthDate span")
   const userDate = new Date(inputDate)
   const currentDate = new Date()
-  //const minAgeDate = new Date()
-  //minAgeDate.setFullYear(minAgeDate.getFullYear() - 16)
+  const minAgeDate = new Date()
+  minAgeDate.setFullYear(minAgeDate.getFullYear() - 16)
 
   if (isNaN(userDate) || userDate > currentDate) {
     formBirth.classList.add("error")
     errorBirth.textContent =  "La date n'est pas bonne"
+  }
+  else if (userDate > minAgeDate) {
+    formBirth.classList.add("error")
+    errorBirth.textContent =  "Vous devez avoir au moins 16 ans"
   }
   else {
     formBirth.classList.remove("error")
