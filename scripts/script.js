@@ -6,6 +6,14 @@ const email = document.getElementById('email');
 const quantity = document.getElementById('quantity');
 const birthdate = document.getElementById('birthdate');
 const locations = document.querySelectorAll('#allLocations .checkbox-input');
+//const radioBtnLocation = document.querySelectorAll('.formLocation input[type="radio"]')
+const radios = document.querySelectorAll('input[name = "location"]');  
+const loc1 = document.getElementById("location1");
+const loc2 = document.getElementById("location2");
+const loc3 = document.getElementById("location3");
+const loc4 = document.getElementById("location4");
+const loc5 = document.getElementById("location5");
+const loc6 = document.getElementById("location6");
 const checkbox1 = document.getElementById('checkbox1');
 const regexQuantity = /^([0-9]{1,2})$/;
 
@@ -102,6 +110,30 @@ function participation(number) {
   }
 }
 
+/**function initAddEventListenerButton() { 
+  radios.forEach(button => {
+    button.addEventListener('change', () => {                            
+    });
+  })
+} 
+*/
+
+/**
+* Fonction qui valide si un élément est coché
+*/
+function isChecked() {
+  const formLocation = document.querySelector(".formLocation")
+  const errorLocation = document.getElementById("errorLocation")
+
+  if(!loc1.checked && !loc2.checked && !loc3.checked && !loc4.checked && !loc5.checked && !loc6.checked) {
+    formLocation.classList.add("error")
+    errorLocation.textContent =  "Veuillez selectionner une ville"
+  } else {
+    formLocation.classList.remove("error")
+    errorLocation.textContent =  ""
+  }
+}
+
 
 function validate() {
 
@@ -112,6 +144,7 @@ function validate() {
     validEmail(email.value)
     birthDate(birthdate.value)
     participation(quantity.value)
+    isChecked()
   })
 }
 

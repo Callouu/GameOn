@@ -216,6 +216,10 @@ input {
   border: 2px solid #FF4E60;
 }
 
+#errorLocation {
+  margin-top: 0px;
+  display:block;
+}
 .text-control {
   margin: 0;
   padding: 8px;
