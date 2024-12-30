@@ -1,4 +1,8 @@
 // DOM Elements
+const modalbg = document.querySelector(".bground");
+const modalBtn = document.querySelectorAll(".modal-btn");
+const closeBtn = document.querySelector(".close");
+const closeValidBtn = document.querySelector(".formValid input")
 const form = document.querySelector("form")
 const firstName = document.getElementById("first")
 const lastName = document.getElementById('last')
@@ -6,7 +10,6 @@ const email = document.getElementById('email')
 const quantity = document.getElementById('quantity')
 const birthdate = document.getElementById('birthdate')
 const locations = document.querySelectorAll('#allLocations .checkbox-input')
-//const radioBtnLocation = document.querySelectorAll('.formLocation input[type="radio"]')
 const radios = document.querySelectorAll('input[name = "location"]')  
 const loc1 = document.getElementById("location1")
 const loc2 = document.getElementById("location2")
@@ -17,6 +20,31 @@ const loc6 = document.getElementById("location6")
 const checkbox1 = document.getElementById('checkbox1')
 const checkbox2 = document.getElementById("checkbox2")
 const formData = document.querySelectorAll(".formData")
+
+// launch modal event
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// launch modal form
+function launchModal() {
+  modalbg.style.display = "block";
+}
+
+// close modal form
+function closeModal() {
+  modalbg.style.display = "none"; 
+}
+
+// close modal event
+closeBtn.addEventListener("click", closeModal);
+
+modalbg.addEventListener("click", (event) => {
+  if (event.target === modalbg) {
+      closeModal()
+  }
+})
+
+// close modal validation
+closeValidBtn.addEventListener("click", closeModal);
 
 /**
 * Fonction qui valide ou non le format du prénom
@@ -171,14 +199,15 @@ function cguCheck(cgu) {
  */
 function newsletter() {
   if (checkbox2.checked){
-    console.log("coché")
     return true
   } else {
-    console.log("pas coché")
     return false
   }
 }
-
+/**
+ * Fonction qui permet de tester si tout les champs sont valide avant de confirmer l'envoi
+ * @returns {boolean} : true or false
+ */
 function manageForm() {
   try {
     validFirstName(firstName.value)
@@ -196,6 +225,9 @@ function manageForm() {
   }
 }
 
+/**
+ * Fonction pour enlever le formulaire et afficher la notification d'inscription avec des propriétés CSS
+ */
 function confirmForm() {
   const formContent = document.querySelector(".modal-body")
   const validContent = document.querySelector(".formValid")
@@ -206,6 +238,9 @@ function confirmForm() {
   validText.textContent = "Merci pour votre inscription"
 }
 
+/**
+ * Fonction qui valide ou non si le formulaire est correct et affiche la notification d'inscription
+ */
 function validate() {
   form.addEventListener("submit", (event) => {
     event.preventDefault()
@@ -215,5 +250,4 @@ function validate() {
     }
   })
 }
-
 validate()
