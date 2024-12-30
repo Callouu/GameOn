@@ -2,6 +2,7 @@
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeBtn = document.querySelector(".close");
+const closeValidBtn = document.querySelector(".formValid input")
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -25,4 +26,6 @@ modalbg.addEventListener("click", (event) => {
   }
 })
 
+// close modal validation
+closeValidBtn.addEventListener("click", closeModal);
 

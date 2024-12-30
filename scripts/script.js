@@ -200,8 +200,9 @@ function confirmForm() {
   const formContent = document.querySelector(".modal-body")
   const validContent = document.querySelector(".formValid")
   const validText = document.querySelector(".formValid span")
+  form.style.display = 'none'
   formContent.style.display = 'none'
-  validContent.style.display = 'block'
+  validContent.style.display = 'flex'
   validText.textContent = "Merci pour votre inscription"
 }
 
