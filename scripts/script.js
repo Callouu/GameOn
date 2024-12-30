@@ -161,15 +161,12 @@ function participation(number) {
 * @throws {Error}
 */
 function cityCheck() {
-  const formLocation = document.querySelector(".formLocation")
   const errorLocation = document.getElementById("errorLocation")
 
   if(!loc1.checked && !loc2.checked && !loc3.checked && !loc4.checked && !loc5.checked && !loc6.checked) {
-    formLocation.classList.add("error")
     errorLocation.textContent =  "Veuillez selectionner une ville"
     throw new Error()
   } else {
-    formLocation.classList.remove("error")
     errorLocation.textContent =  ""
   }
 }
@@ -180,14 +177,11 @@ function cityCheck() {
 * @throws {Error}
 */
 function cguCheck(cgu) {
-  const formCheck = document.querySelector(".formCheck")
   const errorCheck = document.getElementById("cgu")
   if (!cgu.checked) {
-    formCheck.classList.add("error")
     errorCheck.textContent =  "Veuillez accepter les conditions d'utilisation"
     throw new Error()
   } else {
-    formCheck.classList.remove("error")
     errorCheck.textContent =  ""
   }
 }
