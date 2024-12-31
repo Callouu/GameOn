@@ -34,8 +34,13 @@ img {
   overflow: hidden;
   margin: 3.5%;
 }
+
 .header-logo {
     float: left;
+}
+.header-log img {
+  width: auto;
+  height: auto;
 }
 .main-navbar {
     float: right;
@@ -139,17 +144,15 @@ main {
 
 /* Modal form */
 
-.button {
+#button {
   background: #fe142f;
   margin-top: 0.5em;
-  padding: 1em;
   color: #fff;
-  border-radius: 15px;
   cursor: pointer;
   font-size: 16px;
 }
 
-.button:hover {
+#button:hover {
   background: #3876ac;
 }
 
