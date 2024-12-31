@@ -20,6 +20,9 @@ const loc6 = document.getElementById("location6")
 const checkbox1 = document.getElementById('checkbox1')
 const checkbox2 = document.getElementById("checkbox2")
 const formData = document.querySelectorAll(".formData")
+const nameRegex = new RegExp("^[a-zA-Z-]{2,}$")
+const emailRegex = new RegExp ("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+")
+const quantityRegex = new RegExp("[0-9]{1,}")
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -46,7 +49,6 @@ modalbg.addEventListener("click", (event) => {
 // close modal validation
 closeValidBtn.addEventListener("click", closeModal);
 
-
 /**
 * Fonction qui valide ou non le format du prénom
 * @param {string} first : Prénom de la personne
@@ -55,7 +57,6 @@ closeValidBtn.addEventListener("click", closeModal);
 function validFirstName(first) {
   const formFirstName = document.querySelector(".formFirstName")
   const errorFirstName = document.querySelector(".formFirstName span")
-  let nameRegex = new RegExp("^[a-zA-Z-]{2,}$")
 
   if (!nameRegex.test(first)) {
     formFirstName.classList.add("error")
@@ -76,7 +77,6 @@ function validFirstName(first) {
 function validLastName(last) {
   const formLastName = document.querySelector(".formLastName")
   const errorLastName = document.querySelector(".formLastName span")
-  let nameRegex = new RegExp ("^[a-zA-Z-]{2,}$")
 
   if (!nameRegex.test(last)) {
     formLastName.classList.add("error")
@@ -97,7 +97,6 @@ function validLastName(last) {
 function validEmail(email) {
   const formEmail = document.querySelector(".formEmail")
   const errorEmail = document.querySelector(".formEmail span")
-  let emailRegex = new RegExp ("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+")
 
   if (!emailRegex.test(email)) {
     formEmail.classList.add("error")
@@ -150,7 +149,7 @@ function birthDate(inputDate) {
 function participation(number) {
   const tournament = document.querySelector(".formTournament")
   const errorTournament = document.querySelector(".formTournament span")
-  let quantityRegex = new RegExp("[0-9]{1,}")
+
   if (!quantityRegex.test(number)) {
     tournament.classList.add("error")
     errorTournament.textContent =  "Veuillez remplir le champ"
@@ -207,9 +206,7 @@ function newsletter() {
   }
 }
 
-/**
- * Fonction qui permet d'afficher tout les messages d'erreur en même temps
- */
+// Fonction qui permet d'afficher tout les messages d'erreur en même temps
 function showError() {
   validFirstName(firstName.value)
   validLastName(lastName.value)
@@ -241,9 +238,7 @@ function manageForm() {
   }
 }
 
-/**
- * Fonction pour enlever le formulaire et afficher la notification d'inscription avec des propriétés CSS
- */
+// Fonction pour enlever le formulaire et afficher la notification d'inscription avec des propriétés CSS
 function confirmForm() {
   const formContent = document.querySelector(".modal-body")
   const validContent = document.querySelector(".formValid")
@@ -254,9 +249,7 @@ function confirmForm() {
   validText.textContent = "Merci pour votre inscription"
 }
 
-/**
- * Fonction qui valide ou non si le formulaire est correct et affiche la notification d'inscription
- */
+// Fonction qui valide ou non si le formulaire est correct et affiche la notification d'inscription
 function validate() {
   form.addEventListener("submit", (event) => {
     event.preventDefault()
@@ -266,4 +259,6 @@ function validate() {
     }
   })
 }
+
+// Lancement de la fonction
 validate()
