@@ -142,7 +142,7 @@ function birthDate(inputDate) {
 }
 
 /**
-* Fonction qui valide ou non le format de l'email
+* Fonction qui valide ou non le format nombre du champ participation
 * @param {string} number : Nombre de participation 
 * @returns {boolean} : true or false
 */
