@@ -46,10 +46,11 @@ modalbg.addEventListener("click", (event) => {
 // close modal validation
 closeValidBtn.addEventListener("click", closeModal);
 
+
 /**
 * Fonction qui valide ou non le format du prénom
 * @param {string} first : Prénom de la personne
-* @throws {Error}
+* @returns {boolean} : true or false
 */
 function validFirstName(first) {
   const formFirstName = document.querySelector(".formFirstName")
@@ -59,17 +60,18 @@ function validFirstName(first) {
   if (!nameRegex.test(first)) {
     formFirstName.classList.add("error")
     errorFirstName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
-    throw new Error()
+    return false
   } else {
     formFirstName.classList.remove("error")
     errorFirstName.textContent = ""
+    return true
   }
 }
 
 /**
 * Fonction qui valide ou non le format du nom
 * @param {string} last : Nom de la personne
-* @throws {Error}
+* @returns {boolean} : true or false
 */
 function validLastName(last) {
   const formLastName = document.querySelector(".formLastName")
@@ -79,17 +81,18 @@ function validLastName(last) {
   if (!nameRegex.test(last)) {
     formLastName.classList.add("error")
     errorLastName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom."
-    throw new Error()
+    return false
   } else {
     formLastName.classList.remove("error")
     errorLastName.textContent = ""
+    return true
   }
 }
 
 /**
 * Fonction qui valide ou non le format de l'email
 * @param {string} email : Adresse mail de la personne
-* @throws {Error}
+* @returns {boolean} : true or false
 */
 function validEmail(email) {
   const formEmail = document.querySelector(".formEmail")
@@ -99,17 +102,18 @@ function validEmail(email) {
   if (!emailRegex.test(email)) {
     formEmail.classList.add("error")
     errorEmail.textContent =  "L'email n'est pas valide"
-    throw new Error()
+    return false
   } else {
     formEmail.classList.remove("error")
     errorEmail.textContent = ""
+    return true
   }
 }
 
 /**
 * Fonction qui valide ou non le format de l'email
 * @param {string} inputDate : Date de naissance de la personne
-* @throws {Error}
+* @returns {boolean} : true or false
 */
 function birthDate(inputDate) {
   const formBirth = document.querySelector(".birthDate")
@@ -122,25 +126,26 @@ function birthDate(inputDate) {
   // Définit si le champ est vide ou si la date est dans le futur
   if (isNaN(userDate) || userDate > currentDate) {
     formBirth.classList.add("error")
-    errorBirth.textContent =  "La date n'est pas bonne"
-    throw new Error()
+    errorBirth.textContent =  "Vous devez entrer votre date de naissance."
+    return false
   }
   // Définit une erreur à l'âge minimum de 16 ans
   else if (userDate > minAgeDate) {
     formBirth.classList.add("error")
     errorBirth.textContent =  "Vous devez avoir au moins 16 ans"
-    throw new Error()
+    return false
   }
   else {
     formBirth.classList.remove("error")
     errorBirth.textContent = ''
+    return true
   }
 }
 
 /**
 * Fonction qui valide ou non le format de l'email
 * @param {string} number : Nombre de participation 
-* @throws {Error}
+* @returns {boolean} : true or false
 */
 function participation(number) {
   const tournament = document.querySelector(".formTournament")
@@ -149,40 +154,43 @@ function participation(number) {
   if (!quantityRegex.test(number)) {
     tournament.classList.add("error")
     errorTournament.textContent =  "Veuillez remplir le champ"
-    throw new Error()
+    return false
   } else {
     tournament.classList.remove("error")
     errorTournament.textContent = ''
+    return true
   }
 }
 
 /**
 * Fonction qui valide si un élément est coché
-* @throws {Error}
+* @returns {boolean} : true or false
 */
 function cityCheck() {
   const errorLocation = document.getElementById("errorLocation")
 
   if(!loc1.checked && !loc2.checked && !loc3.checked && !loc4.checked && !loc5.checked && !loc6.checked) {
-    errorLocation.textContent =  "Veuillez selectionner une ville"
-    throw new Error()
+    errorLocation.textContent =  "Vous devez choisir une option."
+    return false
   } else {
     errorLocation.textContent =  ""
+    return true
   }
 }
 
 /**
 * Fonction qui valide ou non si la case est bien coché
 * @param {boolean} cgu : Cocher la case obligatoire
-* @throws {Error}
+* @returns {boolean} : true or false
 */
 function cguCheck(cgu) {
   const errorCheck = document.getElementById("cgu")
   if (!cgu.checked) {
-    errorCheck.textContent =  "Veuillez accepter les conditions d'utilisation"
-    throw new Error()
+    errorCheck.textContent =  "Vous devez vérifier que vous acceptez les termes et conditions."
+    return false
   } else {
     errorCheck.textContent =  ""
+    return true
   }
 }
 
@@ -198,23 +206,37 @@ function newsletter() {
     return false
   }
 }
+
+/**
+ * Fonction qui permet d'afficher tout les messages d'erreur en même temps
+ */
+function showError() {
+  validFirstName(firstName.value)
+  validLastName(lastName.value)
+  validEmail(email.value)
+  birthDate(birthdate.value)
+  participation(quantity.value)
+  cityCheck()
+  cguCheck(checkbox1)
+}
+
 /**
  * Fonction qui permet de tester si tout les champs sont valide avant de confirmer l'envoi
  * @returns {boolean} : true or false
  */
 function manageForm() {
-  try {
-    validFirstName(firstName.value)
-    validLastName(lastName.value)
-    validEmail(email.value)
-    birthDate(birthdate.value)
-    participation(quantity.value)
-    cityCheck()
-    cguCheck(checkbox1)
-    newsletter()
+  if (
+  validFirstName(firstName.value) &&
+  validLastName(lastName.value) &&
+  validEmail(email.value) &&
+  birthDate(birthdate.value) &&
+  participation(quantity.value) &&
+  cityCheck() &&
+  cguCheck(checkbox1)
+  ) {
     return true
-  }
-  catch (erreur){
+  } else {
+    showError()
     return false
   }
 }
