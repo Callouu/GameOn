@@ -20,6 +20,8 @@ const loc6 = document.getElementById("location6")
 const checkbox1 = document.getElementById('checkbox1')
 const checkbox2 = document.getElementById("checkbox2")
 const formData = document.querySelectorAll(".formData")
+
+// Regular expressions
 const nameRegex = new RegExp("^[a-zA-Z-]{2,}$")
 const emailRegex = new RegExp ("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+")
 const quantityRegex = new RegExp("[0-9]{1,}")
@@ -40,11 +42,14 @@ function closeModal() {
 // close modal event
 closeBtn.addEventListener("click", closeModal);
 
+/** 
+ * Close modal event if you click outside the modal
 modalbg.addEventListener("click", (event) => {
   if (event.target === modalbg) {
       closeModal()
   }
 })
+*/
 
 // close modal validation
 closeValidBtn.addEventListener("click", closeModal);
@@ -60,7 +65,7 @@ function validFirstName(first) {
 
   if (!nameRegex.test(first)) {
     formFirstName.classList.add("error")
-    errorFirstName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+    errorFirstName.textContent = "Veuillez entrer 2 caractères ou plus"
     return false
   } else {
     formFirstName.classList.remove("error")
@@ -80,7 +85,7 @@ function validLastName(last) {
 
   if (!nameRegex.test(last)) {
     formLastName.classList.add("error")
-    errorLastName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+    errorLastName.textContent = "Veuillez entrer 2 caractères ou plus"
     return false
   } else {
     formLastName.classList.remove("error")
