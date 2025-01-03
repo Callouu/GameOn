@@ -9,14 +9,6 @@ const lastName = document.getElementById('last')
 const email = document.getElementById('email')
 const quantity = document.getElementById('quantity')
 const birthdate = document.getElementById('birthdate')
-const locations = document.querySelectorAll('#allLocations .checkbox-input')
-const radios = document.querySelectorAll('input[name = "location"]')  
-const loc1 = document.getElementById("location1")
-const loc2 = document.getElementById("location2")
-const loc3 = document.getElementById("location3")
-const loc4 = document.getElementById("location4")
-const loc5 = document.getElementById("location5")
-const loc6 = document.getElementById("location6")
 const checkbox1 = document.getElementById('checkbox1')
 const checkbox2 = document.getElementById("checkbox2")
 const formData = document.querySelectorAll(".formData")
@@ -172,8 +164,10 @@ function participation(number) {
 */
 function cityCheck() {
   const errorLocation = document.getElementById("errorLocation")
+  const radios = document.querySelector('input[name = "location"]:checked')
 
-  if(!loc1.checked && !loc2.checked && !loc3.checked && !loc4.checked && !loc5.checked && !loc6.checked) {
+  // on vérifie si un des boutons radio est coché
+  if (radios == null) {
     errorLocation.textContent =  "Vous devez choisir une option."
     return false
   } else {
