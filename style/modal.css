@@ -21,7 +21,6 @@ body {
 }
 
 p {
-  margin-bottom: 0;
   padding: 0.5vw;
 }
 
@@ -121,7 +120,6 @@ main {
   background: #fe142f;
   display: flex;
   margin: auto;
-  padding: 2em;
   color: #fff;
   padding: 0.75rem 2.5rem;
   border-radius: 1rem;
