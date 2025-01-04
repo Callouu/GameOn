@@ -12,7 +12,6 @@ const birthdate = document.getElementById('birthdate')
 const checkbox1 = document.getElementById('checkbox1')
 const checkbox2 = document.getElementById("checkbox2")
 const formData = document.querySelectorAll(".formData")
-const errorSpan = document.createElement("span")
 
 // Regular expressions
 const nameRegex = new RegExp("^[a-zA-Z-]{2,}$")
@@ -247,10 +246,6 @@ function confirmForm() {
   validText.textContent = "Merci pour votre inscription"
 }
 
-function formReset() {
-  HTMLFormElement.reset()
-}
-
 // Fonction qui valide ou non si le formulaire est correct et affiche la notification d'inscription
 
   form.addEventListener("submit", (event) => {
@@ -258,6 +253,5 @@ function formReset() {
     const validForm = manageForm()
     if(validForm) {
       confirmForm()
-      return validForm
     }
   })
