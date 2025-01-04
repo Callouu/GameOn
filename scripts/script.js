@@ -31,11 +31,11 @@ function closeModal() {
   modalbg.style.display = "none"; 
 }
 
-// close modal event
+// Fermeture de la modale avec le bouton
 closeBtn.addEventListener("click", closeModal);
 
 /** 
- * Close modal event if you click outside the modal
+ * Fermeture modale si le click est en dehors de la fenetre
 modalbg.addEventListener("click", (event) => {
   if (event.target === modalbg) {
       closeModal()
@@ -43,7 +43,7 @@ modalbg.addEventListener("click", (event) => {
 })
 */
 
-// close modal validation
+// Fermeture de la modale de validation
 closeValidBtn.addEventListener("click", closeModal);
 
 /**
