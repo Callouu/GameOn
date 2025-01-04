@@ -1,3 +1,5 @@
+const navBtn = document.querySelector("#navBtn")
+
 function editNav() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -6,3 +8,5 @@ function editNav() {
       x.className = "topnav";
     }
   }
+
+  navBtn.addEventListener("click", editNav);

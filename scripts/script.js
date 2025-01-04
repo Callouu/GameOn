@@ -12,6 +12,7 @@ const birthdate = document.getElementById('birthdate')
 const checkbox1 = document.getElementById('checkbox1')
 const checkbox2 = document.getElementById("checkbox2")
 const formData = document.querySelectorAll(".formData")
+const errorSpan = document.createElement("span")
 
 // Regular expressions
 const nameRegex = new RegExp("^[a-zA-Z-]{2,}$")
@@ -31,17 +32,25 @@ function closeModal() {
   modalbg.style.display = "none"; 
 }
 
-// Fermeture de la modale avec le bouton
+function closeModalConfirmation() {
+  modalbg.style.display = "none";
+  location.reload();
+}
+
+
+// Fermeture de la modale avec le bouton croix
 closeBtn.addEventListener("click", closeModal);
 
-/** 
- * Fermeture modale si le click est en dehors de la fenetre
-modalbg.addEventListener("click", (event) => {
-  if (event.target === modalbg) {
-      closeModal()
-  }
-})
-*/
+// fermeture de la modale et reinitialisation du formulaire avec le bouton Fermer
+closeValidBtn.addEventListener("click", closeModalConfirmation);
+
+//Fermeture modale si le click est en dehors de la fenetre
+//modalbg.addEventListener("click", (event) => {
+//  if (event.target === modalbg) {
+//      closeModal()
+//  }
+//})
+
 
 // Fermeture de la modale de validation
 closeValidBtn.addEventListener("click", closeModal);
@@ -52,16 +61,14 @@ closeValidBtn.addEventListener("click", closeModal);
 * @returns {boolean} : true or false
 */
 function validFirstName(first) {
-  const formFirstName = document.querySelector(".formFirstName")
-  const errorFirstName = document.querySelector(".formFirstName span")
+  const parent = document.getElementById('first').parentNode;
 
   if (!nameRegex.test(first)) {
-    formFirstName.classList.add("error")
-    errorFirstName.textContent = "Veuillez entrer 2 caractères ou plus"
+    parent.setAttribute('data-error','Veuillez entrer 2 caractères ou plus');
+    parent.setAttribute('data-error-visible', 'true');
     return false
   } else {
-    formFirstName.classList.remove("error")
-    errorFirstName.textContent = ""
+    parent.setAttribute('data-error-visible','false')
     return true
   }
 }
@@ -72,16 +79,14 @@ function validFirstName(first) {
 * @returns {boolean} : true or false
 */
 function validLastName(last) {
-  const formLastName = document.querySelector(".formLastName")
-  const errorLastName = document.querySelector(".formLastName span")
+  const parent = document.getElementById('last').parentNode;
 
   if (!nameRegex.test(last)) {
-    formLastName.classList.add("error")
-    errorLastName.textContent = "Veuillez entrer 2 caractères ou plus"
+    parent.setAttribute('data-error','Veuillez entrer 2 caractères ou plus');
+    parent.setAttribute('data-error-visible', 'true');
     return false
   } else {
-    formLastName.classList.remove("error")
-    errorLastName.textContent = ""
+    parent.setAttribute('data-error-visible','false')
     return true
   }
 }
@@ -92,16 +97,14 @@ function validLastName(last) {
 * @returns {boolean} : true or false
 */
 function validEmail(email) {
-  const formEmail = document.querySelector(".formEmail")
-  const errorEmail = document.querySelector(".formEmail span")
+  const parent = document.getElementById('email').parentNode;
 
   if (!emailRegex.test(email)) {
-    formEmail.classList.add("error")
-    errorEmail.textContent =  "L'email n'est pas valide"
+    parent.setAttribute('data-error','L\'email n\'est pas valide');
+    parent.setAttribute('data-error-visible', 'true');
     return false
   } else {
-    formEmail.classList.remove("error")
-    errorEmail.textContent = ""
+    parent.setAttribute('data-error-visible','false')
     return true
   }
 }
@@ -112,8 +115,7 @@ function validEmail(email) {
 * @returns {boolean} : true or false
 */
 function birthDate(inputDate) {
-  const formBirth = document.querySelector(".birthDate")
-  const errorBirth = document.querySelector(".birthDate span")
+  const parent = document.getElementById('birthdate').parentNode;
   const userDate = new Date(inputDate)
   const currentDate = new Date()
   const minAgeDate = new Date()
@@ -121,19 +123,18 @@ function birthDate(inputDate) {
 
   // Définit si le champ est vide ou si la date est dans le futur
   if (isNaN(userDate) || userDate > currentDate) {
-    formBirth.classList.add("error")
-    errorBirth.textContent =  "Vous devez entrer votre date de naissance."
+    parent.setAttribute('data-error','Vous devez entrer votre date de naissance.');
+    parent.setAttribute('data-error-visible', 'true');
     return false
   }
   // Définit une erreur à l'âge minimum de 16 ans
   else if (userDate > minAgeDate) {
-    formBirth.classList.add("error")
-    errorBirth.textContent =  "Vous devez avoir au moins 16 ans"
+    parent.setAttribute('data-error','Vous devez avoir au moins 16 ans');
+    parent.setAttribute('data-error-visible', 'true');
     return false
   }
   else {
-    formBirth.classList.remove("error")
-    errorBirth.textContent = ''
+    parent.setAttribute('data-error-visible','false')
     return true
   }
 }
@@ -144,16 +145,14 @@ function birthDate(inputDate) {
 * @returns {boolean} : true or false
 */
 function participation(number) {
-  const tournament = document.querySelector(".formTournament")
-  const errorTournament = document.querySelector(".formTournament span")
+  const parent = document.getElementById('quantity').parentNode;
 
   if (!quantityRegex.test(number)) {
-    tournament.classList.add("error")
-    errorTournament.textContent =  "Veuillez remplir le champ"
+    parent.setAttribute('data-error','Veuillez remplir le champ');
+    parent.setAttribute('data-error-visible', 'true');
     return false
   } else {
-    tournament.classList.remove("error")
-    errorTournament.textContent = ''
+    parent.setAttribute('data-error-visible','false')
     return true
   }
 }
@@ -163,15 +162,15 @@ function participation(number) {
 * @returns {boolean} : true or false
 */
 function cityCheck() {
-  const errorLocation = document.getElementById("errorLocation")
   const radios = document.querySelector('input[name = "location"]:checked')
 
   // on vérifie si un des boutons radio est coché
   if (radios == null) {
-    errorLocation.textContent =  "Vous devez choisir une option."
+    document.querySelector('input[name="location"]').parentElement.setAttribute('data-error','Vous devez choisir une option.')
+    document.querySelector('input[name="location"]').parentElement.setAttribute('data-error-visible', 'true');  
     return false
   } else {
-    errorLocation.textContent =  ""
+    document.querySelector('input[name="location"]').parentElement.setAttribute('data-error-visible', 'false');
     return true
   }
 }
@@ -248,16 +247,17 @@ function confirmForm() {
   validText.textContent = "Merci pour votre inscription"
 }
 
+function formReset() {
+  HTMLFormElement.reset()
+}
+
 // Fonction qui valide ou non si le formulaire est correct et affiche la notification d'inscription
-function validate() {
+
   form.addEventListener("submit", (event) => {
     event.preventDefault()
     const validForm = manageForm()
     if(validForm) {
       confirmForm()
+      return validForm
     }
   })
-}
-
-// Lancement de la fonction
-validate()
