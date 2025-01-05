@@ -67,7 +67,7 @@ p {
   display: none;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1100px) {
   .header-logo img {
     width: 70%;
     margin-top: 17px;
@@ -79,7 +79,7 @@ p {
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1100px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -561,7 +561,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 440px) {
   .hero-headline {
     font-size: 1.8rem;
 }
