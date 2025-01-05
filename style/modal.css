@@ -24,10 +24,6 @@ p {
   padding: 0.5vw;
 }
 
-img {
-  padding-right: 1rem;
-}
-
 .topnav {
   overflow: hidden;
   margin: 3.5%;
@@ -36,7 +32,7 @@ img {
 .header-logo {
     float: left;
 }
-.header-log img {
+.header-logo img {
   width: auto;
   height: auto;
 }
@@ -71,7 +67,11 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
+  .header-logo img {
+    width: 70%;
+    margin-top: 17px;
+  }
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -79,7 +79,7 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -102,6 +102,12 @@ img {
     display: block;
   }
 } 
+
+@media screen and (max-width: 528px) {
+  .topnav a.active {
+    margin-top: 20px;
+  }
+}
 
 main {
   font-size: 130%;
@@ -437,8 +443,10 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 93vh;
+  height: 657px;
+  width: 100%;
   border-radius: 10px;
+  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
@@ -451,6 +459,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
+  min-width: 424px
 }
 .hero-content::after {
   content: "";
@@ -470,6 +479,8 @@ input[data-error]::after {
   font-weight: normal;
   white-space: nowrap;
 }
+
+
 .hero-text {
   width: 146%;
   font-weight: normal;
@@ -481,7 +492,7 @@ input[data-error]::after {
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
-  margin-top: 59px;
+  margin-top: 57px;
 }
 .hero-img {
   grid-column: span 8;
@@ -508,10 +519,11 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1024px) {
   .hero-section {
     display: block;
     box-shadow: unset;
+    height: auto;
   }
   .hero-content {
     background: #fff;
@@ -525,13 +537,14 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
     white-space: normal;
   }
   .hero-text {
-    width: fit-content;
-    block-size: fit-content;
+    width: unset;
     font-size: 1.5rem;
+    margin-top: 20px;
   }
   .hero-img img {
     border-radius: 10px;
@@ -548,6 +561,21 @@ footer {
   }
 }
 
+@media screen and (max-width: 420px) {
+  .hero-headline {
+    font-size: 1.8rem;
+}
+.hero-text {
+  width: 50%;
+  text-size-adjust: 80%;
+}
+}
+
+@media screen and (max-width: 320px) {
+  .hero-headline {
+    text-size-adjust: 80%;
+  }
+}
 @keyframes modalopen {
   from {
     opacity: 0;
